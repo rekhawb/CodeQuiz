@@ -70,7 +70,7 @@ btnArray[btnClickCounter].forEach((element,index) =>{
     if(index == 0){
         //Question
         dynamicEle_ul = document.createElement("ul");
-        dynamicEle_ul.setAttribute("id","ul"+ qThemeJson.btnClickCounter);
+        dynamicEle_ul.setAttribute("id","ul"+ index);
         //append the ul to the document body
         document.body.appendChild(dynamicEle_ul);
         //set id of the ul created
@@ -90,7 +90,7 @@ btnArray[btnClickCounter].forEach((element,index) =>{
 
         //create a button
         dynamicEle_button = document.createElement("button");
-        dynamicEle_button.setAttribute("id","button"+counter_button);
+        dynamicEle_button.setAttribute("id","button"+index);
 
         //append  the button to the parent li
         dynamicEle_li.appendChild(dynamicEle_button);
@@ -113,28 +113,79 @@ btnArray[btnClickCounter].forEach((element,index) =>{
 
 // loop through li and get text content to enable click only when answer choice buttons are clicked
 //var liTags = document.getElementsByTagName("li");
+var btn1 = document.querySelector("#button1");
+var btn2 = document.querySelector("#button2");
+var btn3 = document.querySelector("#button3");
+var btn4 = document.querySelector("#button4");
 
-document.addEventListener("click",(e) => {
+
+btn1.addEventListener("click",(e) => {
  // alert(e.target.id);
   //e.stopPropagation();
+//alert(e.target.id);
+e.stopPropagation();
+//var buttonID = e.target.id;
+//alert(buttonID);
   var answerSelected = e.target.textContent;
+alert(answerSelected);
+answerSelect(answerSelected,answer,btnArray);
+});
 
+btn2.addEventListener("click",(e) => {
+  // alert(e.target.id);
+   //e.stopPropagation();
+ //alert(e.target.id);
+ e.stopPropagation();
+ //var buttonID = e.target.id;
+ //alert(buttonID);
+   var answerSelected = e.target.textContent;
+ alert(answerSelected);
+ answerSelect(answerSelected,answer,btnArray);
+ });
 
+ btn3.addEventListener("click",(e) => {
+  // alert(e.target.id);
+   //e.stopPropagation();
+ //alert(e.target.id);
+ e.stopPropagation();
+ //var buttonID = e.target.id;
+ //alert(buttonID);
+   var answerSelected = e.target.textContent;
+ alert(answerSelected);
+ answerSelect(answerSelected,answer,btnArray);
+ });
+
+ btn4.addEventListener("click",(e) => {
+  // alert(e.target.id);
+   //e.stopPropagation();
+ //alert(e.target.id);
+ e.stopPropagation();
+ //var buttonID = e.target.id;
+ //alert(buttonID);
+   var answerSelected = e.target.textContent;
+ alert(answerSelected);
+ answerSelect(answerSelected,answer,btnArray);
+ });
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function answerSelect(answerSelected,answer,btnArray){
   if (answerSelected === answer){
     // alert("You got it!");
-      //e.target.textContent = answer+"  "+String.fromCodePoint(0x1F44D);
+    //  e.target.textContent = answer+"  "+String.fromCodePoint(0x1F44D);
   
      //add code here to increment points
   
      //alert(answerSelected+localStorage.getItem("headerPoints"));
   
    points = pointCounter("correct",Number(localStorage.getItem("headerPoints")));
-   document.querySelector("h1").textContent = "Points Earned:  "+localStorage.getItem("headerPoints")+"   Time remaining:  "+counterTime;
+   document.querySelector("h1").textContent = "Points Earned:  "+localStorage.getItem("headerPoints")+"   Time remaining:  "+localStorage.getItem("headerTimer");
   
      //remove the current element and call function for next question
      
-     dynamicEle_li.remove();
-    dynamicEle_ul.remove();
+     document.querySelector("li").remove();
+    document.querySelector("#ul0").remove();
     
     setTimeout(() => nextQuestion(btnArray), 1000);
   
@@ -144,7 +195,7 @@ document.addEventListener("click",(e) => {
   
         //highligth incorrect answer in red
        // alert(answerSelected+localStorage.getItem("headerPoints"));
-        e.target.setAttribute("style","background-color:red");
+        //e.target.setAttribute("style","background-color:red");
        // points = pointCounter("",Number(localStorage.getItem("headerPoints")));
        // qThemeJson.headerH1.textContent = "Points Earned:  "+points;
         // loop through li tags and find and higlight correct answer in green
@@ -157,14 +208,18 @@ document.addEventListener("click",(e) => {
             break;
           }
         }/// end of for loop to search for li tags*/
-        dynamicEle_li.remove();
-        dynamicEle_ul.remove();
+       // dynamicEle_li.remove();
+       // dynamicEle_ul.remove();
+   document.querySelector("li").remove();
+   document.querySelector("#ul0").remove();
         setTimeout(() => nextQuestion(btnArray), 1000);
       } /// end of if -else answer answerSelected
     
+
+   
     //setTimeout(() => nextQuestion(btnArray), 1000);
     //alert("question end before timeout");
-});
+//});
 
 // clear the page after the correct answer is shown
 //setTimeout(() => nextQuestion(btnArray), 5000);
@@ -176,7 +231,7 @@ document.addEventListener("click",(e) => {
 
 function nextQuestion(btnArray){
   //alert("Here is the next question" + btnArray.length);
-if(btnArray.length >=1){
+if(btnArray.length >1){
 //alert("nextQuestion"+btnArray);
 
 btnArray.shift();
