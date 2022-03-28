@@ -1,9 +1,12 @@
+/* CSS element property settings*/
+
 body {
   background-color: grey;
   width: 96%;
   margin: auto;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  padding-top: 3%;
 }
 
 header {
@@ -17,11 +20,28 @@ header {
 
 h1 {
   font-size: 4.5rem;
+  line-height: 5rem;
 }
+
+.headerBtn {
+  position: absolute;
+  top: 0px;
+  right: -5%;
+  width: 20%;
+  padding: 5px;
+}
+
+#hdrBtn {
+  color: orange;
+  font-size: 20px;
+  text-align: center;
+}
+
 h2 {
   font-size: 3.5rem;
   color: yellow;
   animation: fadeIn ease 5s infinite;
+  line-height: 5rem;
 }
 
 .theme {
@@ -54,6 +74,7 @@ ul {
   background-color: rgba(201, 76, 76, 0.1);
   margin: auto;
   padding: 5px;
+  line-height: 5rem;
 }
 
 li {
@@ -84,6 +105,10 @@ li {
   border: none;
 }*/
 
+nav {
+  line-height: 5rem;
+}
+
 nav ul {
   display: flex;
   justify-content: space-around;
@@ -107,15 +132,17 @@ button {
   border: none;
   /*background-color: ;*/
   background-color: rgba(201, 76, 76, 0.1);
-  /* cursor: pointer;*/
+  cursor: pointer;
 }
-/* this one was for the dynamic li buttons from javascript
+/* this one was for the dynamic li buttons from javascript*/
 button:hover {
   color: blue;
   background-color: white;
-  width: 55%;
-  transition: width 1s ease-in-out;
-}*/
+  /*width: 55%;
+  transition: width 1s ease-in-out;*/
+}
+
+/* this property changes nav bar button background color on hover*/
 
 .btnStartGame:hover {
   background-color: rgba(201, 76, 76, 0.8);
@@ -152,4 +179,50 @@ footer {
 
   color: yellow;
   text-align: center;
+  line-height: 5rem;
+}
+
+/* set screen size for different media devices*/
+
+@media screen and (min-width: 769px) and (max-width: 1100px) {
+  html {
+    font-size: 0.5rem;
+  }
+
+  .theme img {
+    /*display: inline;*/
+    flex-grow: 1;
+    width: 100%;
+    height: 300px;
+    margin: auto;
+    padding-top: 5px;
+    border: none;
+  }
+}
+
+@media screen and (min-width: 200px) and (max-width: 768px) {
+  html {
+    font-size: 0.2rem;
+  }
+
+  body {
+    height: 50%;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .theme img {
+    display: inline;
+    flex-grow: 1;
+    width: 100%;
+    height: 50px;
+    margin: auto;
+    padding-top: 5px;
+    border: none;
+  }
 }
