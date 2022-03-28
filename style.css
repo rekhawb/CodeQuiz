@@ -1,0 +1,155 @@
+body {
+  background-color: grey;
+  width: 96%;
+  margin: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+header {
+  /*margin: auto;*/
+  /* padding: 5px;*/
+  background-color: blue;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+h1 {
+  font-size: 4.5rem;
+}
+h2 {
+  font-size: 3.5rem;
+  color: yellow;
+  animation: fadeIn ease 5s infinite;
+}
+
+.theme {
+  position: absolute;
+  margin: auto;
+  width: 96%;
+  display: flex;
+  flex: 1 0 100%;
+  align-items: center;
+  justify-content: center;
+
+  /*flex-direction: column;*/
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+ul,
+li {
+  text-align: center;
+}
+
+ul {
+  font-size: 5rem;
+  background-color: rgba(201, 76, 76, 0.1);
+  margin: auto;
+  padding: 5px;
+}
+
+li {
+  list-style: none;
+  margin: auto;
+  padding: 5px;
+  border: 0.5px solid yellow;
+  color: white;
+  width: 50%;
+  /*background-color: beige;*/
+
+  padding: 5px;
+  font-size: 3rem;
+}
+
+li:hover {
+  /*background-color: azure;*/
+  color: blue;
+  cursor: pointer;
+}
+
+li:click {
+  width: 70%;
+}
+
+/*nav ul,
+li {
+  border: none;
+}*/
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+}
+
+.header_ul li,
+.btnStartGame {
+  border: none;
+  display: inline;
+  width: auto;
+  text-align: center;
+  margin: auto;
+  padding: 5px;
+  color: white;
+}
+
+button {
+  width: 50%;
+  height: 100%;
+  font-size: 4rem;
+  border: none;
+  /*background-color: ;*/
+  background-color: rgba(201, 76, 76, 0.1);
+  /* cursor: pointer;*/
+}
+/* this one was for the dynamic li buttons from javascript
+button:hover {
+  color: blue;
+  background-color: white;
+  width: 55%;
+  transition: width 1s ease-in-out;
+}*/
+
+.btnStartGame:hover {
+  background-color: rgba(201, 76, 76, 0.8);
+}
+
+.theme {
+  position: relative;
+  width: 100%;
+}
+
+.theme button {
+  flex-grow: 1;
+  width: 50%;
+  height: auto;
+  padding: 2px;
+  margin: auto;
+  background-color: yellow;
+}
+
+.theme img {
+  /*display: inline;*/
+  flex-grow: 1;
+  width: 100%;
+  height: 500px;
+  margin: auto;
+  padding-top: 5px;
+  border: none;
+}
+
+footer {
+  position: absolute;
+  background-color: blue;
+  width: 96%;
+
+  color: yellow;
+  text-align: center;
+}
