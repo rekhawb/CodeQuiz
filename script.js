@@ -15,7 +15,7 @@ var qThemeJson = {
 
     qListTheme1 : '[ ["Which space shuttle was the first to be launched into space?","Discovery","Atlantis","Columbia","Endeavour","Columbia"] ,["what was Nasa\'s first human space program?","Apollo","Gemini","Skylab","Mercury","Mercury"] ,["What species was the first living being launched into space by the U.S.?","Dog","Guinea pig","Monkey","Fruit flies","Fruit flies"] ]',
 
-    qListTheme2 : '[ ["What is the most common hobby during recent pandemic?","Reading","Working Out","DIY","Watching TV shows and movies","Watching TV shows and movies"] ,["What is the most popular flower in the world?","Tulip","Orchid","Rose",Daisy","Rose"],["What is the most common excuse at work in the world?","To be unwell","Family member ill","Avoiding bad weather","Collecting kids from school","To be unwell"]      ]',
+    qListTheme2 : '[ ["What is the most common hobby during recent pandemic?","Reading","Working Out","DIY","Watching TV shows and movies","Watching TV shows and movies"] ,["What is the most popular flower in the world?","Tulip","Orchid","Rose","Daisy","Rose"],["What is the most common excuse at work in the world?","To be unwell","Family member ill","Avoiding bad weather","Collecting kids from school","To be unwell"]      ]',
 
     qListTheme3 : '[ ["The code in The Matrix comes from what food recipes?","Sushi recipes","Dumpling recipes","Stir-fry recipes","Pad thai recipes","Sushi recipes"] ,["Where were The Lord of the Rings movies filmed?","Ireland","Iceland","New Zealand","Australia","New Zealand"],["What is the name of the fictional land where Frozen takes place?","Arendelle","Naples","Florin","Grimm","Arendelle"]      ]',
 
@@ -24,7 +24,7 @@ var qThemeJson = {
     qListTheme5 : '[ ["What was Twitter’s original name?","Twitter","twiter","Twwiter","twttr","twttr"] ,["Which bone are babies born without?","Lacrimal bone","Temporal bones","Fibula","Kneecap","Kneecap"],["Which animal symbolizes good luck in Europe?","Cheetah","Beetles","Horse","Elephant","Beetles"]      ]',
    
     clearHtmlBody   :function(){
-
+      document.querySelector(".theme").setAttribute("style","display:none");
         document.querySelector("h2").setAttribute("style","display:none");
         document.querySelector("nav").setAttribute("style","display:none");
         document.querySelector("section").setAttribute("style","display:none");
@@ -44,6 +44,7 @@ var qThemeJson = {
     btnClickCounter : localStorage.getItem("btnCounter"),
 
    headerH1           :document.querySelector("h1"),
+   headerHighScore    : document.querySelector("#hdrBtn"),
    
 
 
@@ -283,13 +284,14 @@ Based on the theme, question list from the Object qThemeJson is picked and passe
 
 document.addEventListener("click",(e) => {
   var btnID = e.target.id;
- // alert(btnID);
+// alert(btnID);
   localStorage.setItem("btnCounter", counter);
   if(btnID == 'nav_btnSpace'  || btnID == 'img_btnSpace'){
      qListJsonArray  = JSON.parse(qThemeJson.qListTheme1);
      qList(qListJsonArray ); 
  } else if(btnID == 'nav_btnEntr'  || btnID == 'img_btnEntr'){
     qListJsonArray  = JSON.parse(qThemeJson.qListTheme2);
+   // alert(qListJsonArray);
      qList(qListJsonArray );
   }else if(btnID == 'nav_btnMov'  || btnID == 'img_btnMov'){
     qListJsonArray  = JSON.parse(qThemeJson.qListTheme3);
@@ -304,3 +306,9 @@ document.addEventListener("click",(e) => {
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+qThemeJson.headerHighScore.addEventListener("mouseover",highScore);
+
+function highScore(){
+  var lastHighScore = localStorage.getItem("Latest Highest Score: ");
+  alert( lastHighScore);
+  }
