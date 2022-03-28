@@ -7,7 +7,7 @@ var dynamicEle_li='';
 var counter = 0;
 var counter_button = 0;
 var link ='';
-localStorage.setItem("headerPoints",0);
+//localStorage.setItem("headerPoints",0);
 localStorage.setItem("headerTimer",60);
 var points ='';
 
@@ -26,6 +26,14 @@ var qThemeJson = {
                         
     },
 
+    scoreAndInitials        :'',
+
+    latestScore       :function(){
+      scoreAndInitials = prompt("Time's up! Enter your Initials: ") +" : " + localStorage.getItem("headerPoints");
+      localStorage.setItem("Latest Highest Score: ",scoreAndInitials);
+
+    },
+
     btnClickCounter : localStorage.getItem("btnCounter"),
 
    headerH1           :document.querySelector("h1"),
@@ -34,7 +42,7 @@ var qThemeJson = {
 
 }
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
 
 function qList(btnArray){  //questions start here
@@ -48,6 +56,7 @@ qThemeJson.clearHtmlBody();
 
 var answer = '';
 var counterTime='';
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 setInterval(setCounter,2500);
 function setCounter(){
 localStorage.setItem("headerTimer",localStorage.getItem("headerTimer")-1);
@@ -57,10 +66,12 @@ counterTime = localStorage.getItem("headerTimer");
 
 
 if(counterTime == 0){
-  alert("Time's up!");
+qThemeJson.latestScore();
 location.reload();
 }
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
 btnArray[btnClickCounter].forEach((element,index) =>{
     //alert(index);
@@ -117,69 +128,51 @@ var btn1 = document.querySelector("#button1");
 var btn2 = document.querySelector("#button2");
 var btn3 = document.querySelector("#button3");
 var btn4 = document.querySelector("#button4");
+var answerSelected = '';
 
 
 btn1.addEventListener("click",(e) => {
- // alert(e.target.id);
-  //e.stopPropagation();
-//alert(e.target.id);
+
 e.stopPropagation();
-//var buttonID = e.target.id;
-//alert(buttonID);
-  var answerSelected = e.target.textContent;
-alert(answerSelected);
-answerSelect(answerSelected,answer,btnArray);
+answerSelected = e.target.textContent;
+checkAnswer(answerSelected,answer,btnArray);
+
 });
 
 btn2.addEventListener("click",(e) => {
-  // alert(e.target.id);
-   //e.stopPropagation();
- //alert(e.target.id);
- e.stopPropagation();
- //var buttonID = e.target.id;
- //alert(buttonID);
-   var answerSelected = e.target.textContent;
- alert(answerSelected);
- answerSelect(answerSelected,answer,btnArray);
+  e.stopPropagation();
+ answerSelected = e.target.textContent;
+ checkAnswer(answerSelected,answer,btnArray);
  });
 
  btn3.addEventListener("click",(e) => {
-  // alert(e.target.id);
-   //e.stopPropagation();
- //alert(e.target.id);
  e.stopPropagation();
- //var buttonID = e.target.id;
- //alert(buttonID);
-   var answerSelected = e.target.textContent;
- alert(answerSelected);
- answerSelect(answerSelected,answer,btnArray);
+answerSelected = e.target.textContent;
+checkAnswer(answerSelected,answer,btnArray);
  });
 
  btn4.addEventListener("click",(e) => {
-  // alert(e.target.id);
-   //e.stopPropagation();
- //alert(e.target.id);
  e.stopPropagation();
- //var buttonID = e.target.id;
- //alert(buttonID);
-   var answerSelected = e.target.textContent;
- alert(answerSelected);
- answerSelect(answerSelected,answer,btnArray);
+ answerSelected = e.target.textContent;
+ checkAnswer(answerSelected,answer,btnArray);
  });
+
+}
+
+function checkAnswer(answerSelected,answer,btnArray){
+  localStorage.setItem("answerSelected",answerSelected);
+  localStorage.setItem("answer",answer);
+  answerSelect(answerSelected,answer,btnArray);
 
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function answerSelect(answerSelected,answer,btnArray){
   if (answerSelected === answer){
-    // alert("You got it!");
-    //  e.target.textContent = answer+"  "+String.fromCodePoint(0x1F44D);
-  
-     //add code here to increment points
-  
-     //alert(answerSelected+localStorage.getItem("headerPoints"));
+    
   
    points = pointCounter("correct",Number(localStorage.getItem("headerPoints")));
+   localStorage.setItem("headerTimer",parseInt(localStorage.getItem("headerTimer"))+2);
    document.querySelector("h1").textContent = "Points Earned:  "+localStorage.getItem("headerPoints")+"   Time remaining:  "+localStorage.getItem("headerTimer");
   
      //remove the current element and call function for next question
@@ -190,47 +183,24 @@ function answerSelect(answerSelected,answer,btnArray){
     setTimeout(() => nextQuestion(btnArray), 1000);
   
       }else{
-  
-        //add code here to decrement points
-  
-        //highligth incorrect answer in red
-       // alert(answerSelected+localStorage.getItem("headerPoints"));
-        //e.target.setAttribute("style","background-color:red");
-       // points = pointCounter("",Number(localStorage.getItem("headerPoints")));
-       // qThemeJson.headerH1.textContent = "Points Earned:  "+points;
-        // loop through li tags and find and higlight correct answer in green
-        
-  /*
-        for (var i = 0; i < liTags.length; i++) {
-          if (liTags[i].textContent == answer) {
-           // alert(liTags[i].textContent);
-            liTags[i].setAttribute("style","background-color:green");         
-            break;
-          }
-        }/// end of for loop to search for li tags*/
-       // dynamicEle_li.remove();
-       // dynamicEle_ul.remove();
+        points = pointCounter("incorrect",Number(localStorage.getItem("headerPoints")));
+        localStorage.setItem("headerTimer",parseInt(localStorage.getItem("headerTimer"))-3);
+        document.querySelector("h1").textContent = "Points Earned:  "+localStorage.getItem("headerPoints")+"   Time remaining:  "+localStorage.getItem("headerTimer");
+
    document.querySelector("li").remove();
    document.querySelector("#ul0").remove();
         setTimeout(() => nextQuestion(btnArray), 1000);
-      } /// end of if -else answer answerSelected
+      } 
+    }
+ /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
     
-
-   
-    //setTimeout(() => nextQuestion(btnArray), 1000);
-    //alert("question end before timeout");
-//});
-
-// clear the page after the correct answer is shown
-//setTimeout(() => nextQuestion(btnArray), 5000);
-
-
-}//questions end here
-// clear the question once it is answered
 
 
 function nextQuestion(btnArray){
   //alert("Here is the next question" + btnArray.length);
+
+
+
 if(btnArray.length >1){
 //alert("nextQuestion"+btnArray);
 
@@ -238,30 +208,16 @@ btnArray.shift();
 
   qList(btnArray);
 }else{
+ /* var scoreAndInitials = prompt("Time's up! Enter your Initials: ") +" : " + localStorage.getItem("headerPoints");
+  localStorage.setItem("Latest Highest Score: ",scoreAndInitials);*/
+  qThemeJson.latestScore();
   setTimeout(() =>  pageReload(), 1000);
  // location.reload();
 }
- // dynamicEle_ul.remove();
-  
-//alert("nextQuestion"+btnArray.length);
-//alert(btnArray);
-//if(btnArray.length < 0){
-
-  //location.reload();
-  //alert("Here is the Last question" + btnArray.length);
-  //document.getElementsByTagName("button").remove();
-  //var dynamicBtn = document.createElement("button");
- 
-  //document.body.appendChild(dynamicBtn);
-  //dynamicBtn.textContent = "Home Page";
-//}else{
-  //btnArray.shift();
-  //qList(btnArray);
-//}
 
 }
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
 //after we loop through all the questions, prompt final score, ask user to enter initials and then refresh page to go to the main page
 
@@ -270,6 +226,7 @@ function pageReload(){
   location.reload();
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
 function pointCounter(answer,curPoints){
 
@@ -313,74 +270,5 @@ document.addEventListener("click",(e) => {
 alert("submit");
   }
 });
-
-
-
-
-/*
-
-var qListJson = '[ ["Which space shuttle was the first to be launched into space?","Discovery","Atlantis","Columbia","Endeavour","Columbia"] ,["what was Nasa\'s first human space program?","Apollo","Gemini","Skylab","Mercury","Mercury"] ,["What species was the first living being launched into space by the U.S.?","Dog","Guinea Pig","Monkey","Fruit flies","Fruit flies"]     ]';
-
-var qListJsonArray = JSON.parse(qListJson);
-//alert(qListJsonArray);
-                           
-                           //document.querySelector("#jsonText").textContent = qListJsonArray[0][0];
-                           
-                           var dynamicEle_ul = '';
-                           var dynamicEle_li='';
-                           var counter = 0;
-                           var counter_button = 0;
-                           var link ='';
-                           
-                           //document.body.appendChild(dynamicEle_ul);
-
-                          // qListJsonArray.forEach((element,index) => {
-                            var eleVal =   qListJsonArray[0];//element;
-                            //alert(index);
-                            counter++;
-                            counter_button = 0;
-                            eleVal.forEach((element,index) =>{
-                                //alert(index);
-                               
-                                if(index == 0){
-                                    //Question
-                                    dynamicEle_ul = document.createElement("ul");
-                                    dynamicEle_ul.setAttribute("id","ul"+counter);
-                                    //append the ul to the document body
-                                    document.body.appendChild(dynamicEle_ul);
-                                    //set id of the ul created
-                                    dynamicEle_ul.textContent = counter+"."+element;
-
-                                }else if (index < 5){
-                                //Choices
-                               counter_button++;
-                               //create list item
-                                dynamicEle_li = document.createElement("li");
-                                dynamicEle_li.href = element;
-
-                                //append to parent ul
-                                dynamicEle_ul.appendChild(dynamicEle_li);
-
-                                //create a button
-                                dynamicEle_button = document.createElement("button");
-                                dynamicEle_button.setAttribute("id","button"+counter_button);
-
-                                //append  the button to the parent li
-                                dynamicEle_li.appendChild(dynamicEle_button);
-                                dynamicEle_button.textContent=element;
-                            }
-                            
-                               // alert(element);
-                            })
-                           
-                          // });
-                           
-
- 
- 
- /*class qList {
-   constructor()
-
- }*/
 
 
