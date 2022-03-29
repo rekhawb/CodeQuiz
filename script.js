@@ -87,7 +87,7 @@ nextQuestion()
 */
 
 function qList(btnArray){  //questions start here
-//check the local storage counter. if it is 0, then display first question. else display question at index local storage counter
+
 var btnClickCounter = 0;//localStorage.getItem("btnCounter");
 //alert(btnClickCounter);
 var themeArrayLen = btnArray.length;
@@ -122,6 +122,7 @@ btnArray[btnClickCounter].forEach((element,index) =>{
     if(index == 0){
         //Question
         dynamicEle_ul = document.createElement("ul");
+        dynamicEle_ul.setAttribute("class","qList");
         dynamicEle_ul.setAttribute("id","ul"+ index);
         //append the ul to the document body
         document.body.appendChild(dynamicEle_ul);
@@ -211,7 +212,7 @@ function answerSelect(answerSelected,answer,btnArray){
     
   
    points = pointCounter("correct",Number(localStorage.getItem("headerPoints")));
-   localStorage.setItem("headerTimer",parseInt(localStorage.getItem("headerTimer"))+2);
+   localStorage.setItem("headerTimer",Number(localStorage.getItem("headerTimer"))+2);
    document.querySelector("h1").textContent = "Points Earned:  "+localStorage.getItem("headerPoints")+"   Time remaining:  "+localStorage.getItem("headerTimer");
   
      //remove the current element and call function for next question
@@ -223,7 +224,7 @@ function answerSelect(answerSelected,answer,btnArray){
   
       }else{
         points = pointCounter("incorrect",Number(localStorage.getItem("headerPoints")));
-        localStorage.setItem("headerTimer",parseInt(localStorage.getItem("headerTimer"))-3);
+        localStorage.setItem("headerTimer",Number(localStorage.getItem("headerTimer"))-3);
         document.querySelector("h1").textContent = "Points Earned:  "+localStorage.getItem("headerPoints")+"   Time remaining:  "+localStorage.getItem("headerTimer");
 
    document.querySelector("li").remove();
