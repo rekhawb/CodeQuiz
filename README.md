@@ -12,3 +12,10 @@
 - At the end of the quiz, you will be prompted to enter intials.
 - You can always view the last score by hovering over the Last High Score label at the top right corner on the home page.
 - Hope you will enjoy the quiz!
+
+Here is a video demonstration on how to take the quiz!
+
+
+
+https://user-images.githubusercontent.com/98908396/161389260-b40a112e-5e34-4289-a951-4d430ae8f683.mp4
+
